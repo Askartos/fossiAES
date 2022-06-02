@@ -47,20 +47,20 @@ class aes (val addrlen : Int ,val base:BigInt) extends Module{
   val addr = Wire(UInt((log2Ceil(1+nrego)).W))
 	addr:= (io.wbs_adr_i-base.U) >>2 
 	
-	val valid = io.wbs_stb_i & !busy & ( (io.wbs_adr_i & (0xFF.U <<24) ) === ( base.U & (0xFF.U <<24)) )
+	val valid = io.wbs_stb_i & io.wbs_cyc_i & !busy & ( (io.wbs_adr_i & (0xFF.U <<24) ) === ( base.U & (0xFF.U <<24)) )
 	
 	val ack = RegNext(valid)
  
  io.wbs_ack_o:=ack
  //write 
- when( valid & io.wbs_cyc_i & io.wbs_we_i ){
+ when( valid  & io.wbs_we_i ){
 				rego(addr) := (rego(addr) & ! (mask.asUInt)) |  ( io.wbs_dat_i & mask.asUInt )
  }
  //read
 
 	
  val readed = Wire(UInt(32.W))
- when( valid & io.wbs_cyc_i & ! io.wbs_we_i ){
+ when( valid & ! io.wbs_we_i ){
 		readed:=full_regs(addr)
  }.otherwise {
 		readed:=0.U 
@@ -340,5 +340,5 @@ class aes (val addrlen : Int ,val base:BigInt) extends Module{
 
 //fossiAES.aesMain
 object aesMain extends App {
-	(new chisel3.stage.ChiselStage).emitVerilog(new aes(32,BigInt(0x20000080))  ,args)
+	(new chisel3.stage.ChiselStage).emitVerilog(new aes(32,BigInt(0x30000000))  ,args)
 }
