@@ -4,7 +4,7 @@
 		module="aes-build"
 		revision="0.1.0-SNAPSHOT"
 		status="integration"
-		publication="20220529180627"
+		publication="20220531222931"
 		e:sbtVersion="1.0" e:scalaVersion="2.12"
 	>
 		<description>

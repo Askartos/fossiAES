@@ -2,10 +2,10 @@
 [0m[[0m[0mdebug[0m] [0m[0mInput file mappings:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	fossiAES/aesMain$delayedInit$body.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /home/askartos/sandbox/caravel_tutorial/fossiAES/verilog/rtl/aes/target/scala-2.12/classes/fossiAES/aesMain$delayedInit$body.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	fossiAES/aes_Bundle.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  /home/askartos/sandbox/caravel_tutorial/fossiAES/verilog/rtl/aes/target/scala-2.12/classes/fossiAES/aes_Bundle.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	fossiAES/sboxMain$delayedInit$body.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /home/askartos/sandbox/caravel_tutorial/fossiAES/verilog/rtl/aes/target/scala-2.12/classes/fossiAES/sboxMain$delayedInit$body.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	fossiAES/whishbone_slave.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/askartos/sandbox/caravel_tutorial/fossiAES/verilog/rtl/aes/target/scala-2.12/classes/fossiAES/whishbone_slave.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	fossiAES/ports_sbox$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /home/askartos/sandbox/caravel_tutorial/fossiAES/verilog/rtl/aes/target/scala-2.12/classes/fossiAES/ports_sbox$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	fossiAES/sbox.class[0m
@@ -18,8 +18,6 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  /home/askartos/sandbox/caravel_tutorial/fossiAES/verilog/rtl/aes/target/scala-2.12/classes/fossiAES/mix.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	fossiAES/aesMain$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /home/askartos/sandbox/caravel_tutorial/fossiAES/verilog/rtl/aes/target/scala-2.12/classes/fossiAES/aesMain$.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	fossiAES/BusConsts.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  /home/askartos/sandbox/caravel_tutorial/fossiAES/verilog/rtl/aes/target/scala-2.12/classes/fossiAES/BusConsts.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	fossiAES/aes.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /home/askartos/sandbox/caravel_tutorial/fossiAES/verilog/rtl/aes/target/scala-2.12/classes/fossiAES/aes.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	fossiAES/sboxMain$.class[0m
@@ -28,12 +26,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  /home/askartos/sandbox/caravel_tutorial/fossiAES/verilog/rtl/aes/target/scala-2.12/classes/fossiAES/ports_mix.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	fossiAES/sboxMain.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /home/askartos/sandbox/caravel_tutorial/fossiAES/verilog/rtl/aes/target/scala-2.12/classes/fossiAES/sboxMain.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	fossiAES/BusConsts$.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  /home/askartos/sandbox/caravel_tutorial/fossiAES/verilog/rtl/aes/target/scala-2.12/classes/fossiAES/BusConsts$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	fossiAES/ports_sbox.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /home/askartos/sandbox/caravel_tutorial/fossiAES/verilog/rtl/aes/target/scala-2.12/classes/fossiAES/ports_sbox.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	fossiAES/aesMain.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /home/askartos/sandbox/caravel_tutorial/fossiAES/verilog/rtl/aes/target/scala-2.12/classes/fossiAES/aesMain.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	fossiAES/Condor_SlaveIO.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  /home/askartos/sandbox/caravel_tutorial/fossiAES/verilog/rtl/aes/target/scala-2.12/classes/fossiAES/Condor_SlaveIO.class[0m
 [0m[[0m[0minfo[0m] [0m[0mDone packaging.[0m

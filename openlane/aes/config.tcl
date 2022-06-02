@@ -28,17 +28,27 @@ set ::env(DESIGN_IS_CORE) 0
 
 set ::env(CLOCK_PORT) "clock"
 set ::env(CLOCK_NET) "aes.clock"
-set ::env(CLOCK_PERIOD) "100"
+set ::env(CLOCK_PERIOD) "50"
+
+
+#Specifies a time margin for the slack when fixing hold violations. 
+#Normally the resizer will stop when it reaches zero slack.
+# This option allows you to overfix. (Default: 0.1ns)
+
+set ::env(GLB_RESIZER_HOLD_SLACK_MARGIN) {0.6}
+set ::env(PL_RESIZER_HOLD_SLACK_MARGIN) {0.6}
+
+#area
 
 set ::env(FP_SIZING) absolute
-set ::env(DIE_AREA) "0 0 3000 6000"
-
-#set ::env(FP_PIN_ORDER_CFG) $script_dir/pin_order.cfg
-set ::env(PL_SKIP_INITIAL_PLACEMENT) 0
-#set ::env(PL_BASIC_PLACEMENT) 1
+set ::env(DIE_AREA) "0 0 800 1000"
 set ::env(PL_TARGET_DENSITY) 0.3
+#set ::env(PL_BASIC_PLACEMENT) 1
 set ::env(GLB_RT_ALLOW_CONGESTION) 1
 #set ::env(ROUTING_CORES) 4
+
+#set ::env(FP_PIN_ORDER_CFG) $script_dir/pin_order.cfg
+
 
 # Maximum layer used for routing is metal 4.
 # This is because this macro will be inserted in a top level (user_project_wrapper) 

@@ -14,15 +14,13 @@ import chisel3._
 import chisel3.util._
 
 
-class aes_Bundle extends Bundle {
-	val condor= new Condor_SlaveIO
-}
-
 class aes (val addrlen : Int ,val base:BigInt) extends Module{
 	val selector: Boolean = false // true for more key regs, false charge the key everytime
-	val io = IO(new aes_Bundle)
+	val io = IO(new whishbone_slave)
+	
+	
+	 //registers
 	val default = List("h0".U(32.W),"h0".U(32.W),"h0".U(32.W),"h0".U(32.W),"h0".U(32.W),"h0".U(32.W),"h0".U(32.W),"h0".U(32.W),"h0".U(1.W))
-	//INTERFAZ
 	val nrego = default.size
 	val rego =RegInit(VecInit(default))
 	val regi = Wire(Vec(1,UInt(addrlen.W)))
@@ -30,38 +28,47 @@ class aes (val addrlen : Int ,val base:BigInt) extends Module{
 	normregos:=rego
 	val full_regs = Wire(Vec(4+nrego,UInt(addrlen.W)))
 	full_regs:= (Cat(regi.asUInt,normregos.asUInt)).asTypeOf(full_regs) 
-	val raddr = Wire(UInt((log2Ceil(4+nrego)).W))
-	val wraddr= RegNext( raddr )
-	val bmask = RegNext(io.condor.caddr(1,0))
-	val stado = RegInit(false.B)
-	val csize = RegNext(io.condor.csize)
+	
 
 	val standBy :: stage0 :: stage1 :: stage2 :: stage3 :: stage4 :: stage5 :: stage6 :: stage7 :: stage8 :: stage9 :: Nil = Enum(11)
 	val state = RegInit(standBy)
 	val busy	= state =/= standBy
 
-	when (io.condor.csel && (io.condor.cvalid) && (io.condor.creq)  && io.condor.cwrite && ~busy){
-	  stado:=true.B	    
-		}.otherwise{
-	  stado:=false.B
+  val mask = Wire(Vec(4,UInt(8.W)))
+	for (j <- 0 until 4) {
+		 when(io.wbs_sel_i(j)){
+  		mask(j):=0xFF.U
+ 		 }.otherwise{
+ 		 	mask(j):=0.U
+ 		 }
 	}
- 	when(stado){
- 		when(csize===0.U){ //byte
-			rego(wraddr):= ( rego(wraddr) & ~( 0xFF.U << bmask*8.U )) | io.condor.cwdata
-		}.elsewhen(csize===1.U){//half word
-			rego(wraddr):= (rego(wraddr)& ~( 0xFFFF.U << bmask(1)*16.U )) | io.condor.cwdata
-		}.elsewhen(csize===2.U){// 32 bits
-			rego(wraddr):=io.condor.cwdata
-		}.otherwise{
-		 	rego(wraddr):=io.condor.cwdata
-		}
- 	}
 
-	raddr:= (io.condor.caddr-base.U) >>2 
-	val readed = RegNext(full_regs(raddr))
-	io.condor.crdata    := readed
-	io.condor.creadyout := true.B
-	io.condor.cresp     := false.B 
+
+  val addr = Wire(UInt((log2Ceil(1+nrego)).W))
+	addr:= (io.wbs_adr_i-base.U) >>2 
+	
+	val valid = io.wbs_stb_i & !busy & ( (io.wbs_adr_i & (0xFF.U <<24) ) === ( base.U & (0xFF.U <<24)) )
+	
+	val ack = RegNext(valid)
+ 
+ io.wbs_ack_o:=ack
+ //write 
+ when( valid & io.wbs_cyc_i & io.wbs_we_i ){
+				rego(addr) := (rego(addr) & ! (mask.asUInt)) |  ( io.wbs_dat_i & mask.asUInt )
+ }
+ //read
+
+	
+ val readed = Wire(UInt(32.W))
+ when( valid & io.wbs_cyc_i & ! io.wbs_we_i ){
+		readed:=full_regs(addr)
+ }.otherwise {
+		readed:=0.U 
+ }
+ 
+
+	io.wbs_dat_o := RegNext(readed)
+
 
 	val ronda 			= RegInit(0.U(4.W))
 	val selMux1W0 	= RegInit(5.U(3.W))

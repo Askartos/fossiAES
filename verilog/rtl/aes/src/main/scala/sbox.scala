@@ -1,12 +1,11 @@
 /**********************************************************
-*	Name:  				SBOX look at table
+*	Name:  				SBOX 
 *
 *	Author: 			Hanssel Morales- 2019
 *
 *	Modified by: 	    Hanssel Morales 05/2022.											
 *																													
-* Abstract:		a general porpuse timer that will be used for
-benchmarking 
+* Abstract:		sbox lookup table
 ***********************************************************/
 
 package fossiAES

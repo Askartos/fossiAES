@@ -1,0 +1,4 @@
+[0m[[0m[31merror[0m] [0m[0m/home/askartos/sandbox/caravel_tutorial/fossiAES/verilog/rtl/aes/src/main/scala/aes.scala:50:2: ')' expected but 'val' found.[0m
+[0m[[0m[31merror[0m] [0m[0m	val ack = RegNext(valid)[0m
+[0m[[0m[31merror[0m] [0m[0m	^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m
