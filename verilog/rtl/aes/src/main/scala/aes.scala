@@ -107,12 +107,12 @@ class aes (val addrlen : Int ,val base:BigInt) extends Module{
 	val moduloMix = Module(new mix)
 	moduloMix.io.msg := mux2MixARK
 
-	val cumbia = RegNext(moduloSbox.io.msg_out)
+	//val cumbia = RegNext(moduloSbox.io.msg_out)
 
 	val rcon_pure: Seq[Int] = Seq(
  	0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1B, 0x36, 0x6C, 0xD8, 0x00, 0x00, 0x00, 0x00)
  	val rcon_hw = VecInit(rcon_pure.map(_.U(8.W)))
-	val put0 = Cat(rcon_hw(ronda),0.U(24.W)) ^ cumbia ^ reg1K0
+	val put0 = Cat(rcon_hw(ronda),0.U(24.W)) ^ moduloSbox.io.msg_out ^ reg1K0
 	val put1 = put0 ^ reg1K1
 	val put2 = put1 ^ reg1K2
 	val put3 = put2 ^ reg1K3

@@ -1108,7 +1108,6 @@ module aes(
   reg [31:0] _RAND_22;
   reg [31:0] _RAND_23;
   reg [31:0] _RAND_24;
-  reg [31:0] _RAND_25;
 `endif // RANDOMIZE_REG_INIT
   wire [31:0] moduloSbox_io_msg; // @[aes.scala 105:32]
   wire [31:0] moduloSbox_io_msg_out; // @[aes.scala 105:32]
@@ -1204,7 +1203,6 @@ module aes(
   wire [31:0] _T_55 = _T_54 ? rego_3 : 32'h0; // @[Mux.scala 98:16]
   wire [31:0] _T_56 = _T_53 ? rego_2 : _T_55; // @[Mux.scala 98:16]
   wire [31:0] _T_57 = _T_52 ? rego_1 : _T_56; // @[Mux.scala 98:16]
-  reg [31:0] cumbia; // @[aes.scala 110:29]
   wire [7:0] _GEN_50 = 4'h1 == ronda ? 8'h2 : 8'h1; // @[Cat.scala 30:58 Cat.scala 30:58]
   wire [7:0] _GEN_51 = 4'h2 == ronda ? 8'h4 : _GEN_50; // @[Cat.scala 30:58 Cat.scala 30:58]
   wire [7:0] _GEN_52 = 4'h3 == ronda ? 8'h8 : _GEN_51; // @[Cat.scala 30:58 Cat.scala 30:58]
@@ -1221,8 +1219,8 @@ module aes(
   wire [7:0] _GEN_63 = 4'he == ronda ? 8'h0 : _GEN_62; // @[Cat.scala 30:58 Cat.scala 30:58]
   wire [7:0] _GEN_64 = 4'hf == ronda ? 8'h0 : _GEN_63; // @[Cat.scala 30:58 Cat.scala 30:58]
   wire [31:0] _T_58 = {_GEN_64,24'h0}; // @[Cat.scala 30:58]
-  wire [31:0] _T_59 = _T_58 ^ cumbia; // @[aes.scala 115:50]
-  wire [31:0] put0 = _T_59 ^ reg1K0; // @[aes.scala 115:59]
+  wire [31:0] _T_59 = _T_58 ^ moduloSbox_io_msg_out; // @[aes.scala 115:50]
+  wire [31:0] put0 = _T_59 ^ reg1K0; // @[aes.scala 115:74]
   wire [31:0] put1 = put0 ^ reg1K1; // @[aes.scala 116:25]
   wire [31:0] put2 = put1 ^ reg1K2; // @[aes.scala 117:25]
   wire [31:0] put3 = put2 ^ reg1K3; // @[aes.scala 118:25]
@@ -1665,7 +1663,6 @@ module aes(
     end else begin
       reg1K3 <= rego_7;
     end
-    cumbia <= moduloSbox_io_msg_out; // @[aes.scala 110:29]
     if (reset) begin // @[aes.scala 176:46]
       REG_1 <= 1'h0; // @[aes.scala 176:46]
     end else begin
@@ -1757,9 +1754,7 @@ initial begin
   _RAND_23 = {1{`RANDOM}};
   reg1K3 = _RAND_23[31:0];
   _RAND_24 = {1{`RANDOM}};
-  cumbia = _RAND_24[31:0];
-  _RAND_25 = {1{`RANDOM}};
-  REG_1 = _RAND_25[0:0];
+  REG_1 = _RAND_24[0:0];
 `endif // RANDOMIZE_REG_INIT
   `endif // RANDOMIZE
 end // initial
