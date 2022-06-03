@@ -1105,6 +1105,10 @@ module aes(
   reg [31:0] _RAND_19;
   reg [31:0] _RAND_20;
   reg [31:0] _RAND_21;
+  reg [31:0] _RAND_22;
+  reg [31:0] _RAND_23;
+  reg [31:0] _RAND_24;
+  reg [31:0] _RAND_25;
 `endif // RANDOMIZE_REG_INIT
   wire [31:0] moduloSbox_io_msg; // @[aes.scala 105:32]
   wire [31:0] moduloSbox_io_msg_out; // @[aes.scala 105:32]
@@ -1157,8 +1161,8 @@ module aes(
   wire [31:0] _GEN_10 = 4'h6 == addr ? rego_6 : _GEN_9; // @[aes.scala 57:59 aes.scala 57:59]
   wire [31:0] _GEN_11 = 4'h7 == addr ? rego_7 : _GEN_10; // @[aes.scala 57:59 aes.scala 57:59]
   wire [31:0] _GEN_12 = 4'h8 == addr ? rego_8 : _GEN_11; // @[aes.scala 57:59 aes.scala 57:59]
-  wire [31:0] _GEN_178 = {{31'd0}, _T_31 == 32'h0}; // @[aes.scala 57:59]
-  wire [31:0] _T_33 = _GEN_12 & _GEN_178; // @[aes.scala 57:59]
+  wire [31:0] _GEN_182 = {{31'd0}, _T_31 == 32'h0}; // @[aes.scala 57:59]
+  wire [31:0] _T_33 = _GEN_12 & _GEN_182; // @[aes.scala 57:59]
   wire [31:0] _T_35 = io_wbs_dat_i & _T_31; // @[aes.scala 57:96]
   wire [31:0] _T_36 = _T_33 | _T_35; // @[aes.scala 57:78]
   wire [31:0] _GEN_32 = 4'h1 == addr ? full_regs_1 : full_regs_0; // @[aes.scala 64:23 aes.scala 64:23]
@@ -1179,12 +1183,16 @@ module aes(
   reg [2:0] selMuxSbox; // @[aes.scala 78:34]
   reg [1:0] selMuxMixARK; // @[aes.scala 79:34]
   reg [1:0] selKey; // @[aes.scala 80:50]
+  reg [31:0] reg1K0; // @[Reg.scala 27:20]
+  reg [31:0] reg1K1; // @[Reg.scala 27:20]
+  reg [31:0] reg1K2; // @[Reg.scala 27:20]
+  reg [31:0] reg1K3; // @[Reg.scala 27:20]
   wire  _T_39 = selMuxSbox == 3'h0; // @[aes.scala 94:29]
   wire  _T_40 = selMuxSbox == 3'h1; // @[aes.scala 95:29]
   wire  _T_41 = selMuxSbox == 3'h2; // @[aes.scala 96:29]
   wire  _T_42 = selMuxSbox == 3'h3; // @[aes.scala 97:29]
   wire  _T_43 = selMuxSbox == 3'h4; // @[aes.scala 98:29]
-  wire [31:0] _T_46 = {rego_7[23:0],rego_7[31:24]}; // @[Cat.scala 30:58]
+  wire [31:0] _T_46 = {reg1K3[23:0],reg1K3[31:24]}; // @[Cat.scala 30:58]
   wire [31:0] _T_47 = _T_43 ? _T_46 : 32'h0; // @[Mux.scala 98:16]
   wire [31:0] _T_48 = _T_42 ? rego_3 : _T_47; // @[Mux.scala 98:16]
   wire [31:0] _T_49 = _T_41 ? rego_2 : _T_48; // @[Mux.scala 98:16]
@@ -1197,38 +1205,38 @@ module aes(
   wire [31:0] _T_56 = _T_53 ? rego_2 : _T_55; // @[Mux.scala 98:16]
   wire [31:0] _T_57 = _T_52 ? rego_1 : _T_56; // @[Mux.scala 98:16]
   reg [31:0] cumbia; // @[aes.scala 110:29]
-  wire [7:0] _GEN_46 = 4'h1 == ronda ? 8'h2 : 8'h1; // @[Cat.scala 30:58 Cat.scala 30:58]
-  wire [7:0] _GEN_47 = 4'h2 == ronda ? 8'h4 : _GEN_46; // @[Cat.scala 30:58 Cat.scala 30:58]
-  wire [7:0] _GEN_48 = 4'h3 == ronda ? 8'h8 : _GEN_47; // @[Cat.scala 30:58 Cat.scala 30:58]
-  wire [7:0] _GEN_49 = 4'h4 == ronda ? 8'h10 : _GEN_48; // @[Cat.scala 30:58 Cat.scala 30:58]
-  wire [7:0] _GEN_50 = 4'h5 == ronda ? 8'h20 : _GEN_49; // @[Cat.scala 30:58 Cat.scala 30:58]
-  wire [7:0] _GEN_51 = 4'h6 == ronda ? 8'h40 : _GEN_50; // @[Cat.scala 30:58 Cat.scala 30:58]
-  wire [7:0] _GEN_52 = 4'h7 == ronda ? 8'h80 : _GEN_51; // @[Cat.scala 30:58 Cat.scala 30:58]
-  wire [7:0] _GEN_53 = 4'h8 == ronda ? 8'h1b : _GEN_52; // @[Cat.scala 30:58 Cat.scala 30:58]
-  wire [7:0] _GEN_54 = 4'h9 == ronda ? 8'h36 : _GEN_53; // @[Cat.scala 30:58 Cat.scala 30:58]
-  wire [7:0] _GEN_55 = 4'ha == ronda ? 8'h6c : _GEN_54; // @[Cat.scala 30:58 Cat.scala 30:58]
-  wire [7:0] _GEN_56 = 4'hb == ronda ? 8'hd8 : _GEN_55; // @[Cat.scala 30:58 Cat.scala 30:58]
-  wire [7:0] _GEN_57 = 4'hc == ronda ? 8'h0 : _GEN_56; // @[Cat.scala 30:58 Cat.scala 30:58]
-  wire [7:0] _GEN_58 = 4'hd == ronda ? 8'h0 : _GEN_57; // @[Cat.scala 30:58 Cat.scala 30:58]
-  wire [7:0] _GEN_59 = 4'he == ronda ? 8'h0 : _GEN_58; // @[Cat.scala 30:58 Cat.scala 30:58]
-  wire [7:0] _GEN_60 = 4'hf == ronda ? 8'h0 : _GEN_59; // @[Cat.scala 30:58 Cat.scala 30:58]
-  wire [31:0] _T_58 = {_GEN_60,24'h0}; // @[Cat.scala 30:58]
+  wire [7:0] _GEN_50 = 4'h1 == ronda ? 8'h2 : 8'h1; // @[Cat.scala 30:58 Cat.scala 30:58]
+  wire [7:0] _GEN_51 = 4'h2 == ronda ? 8'h4 : _GEN_50; // @[Cat.scala 30:58 Cat.scala 30:58]
+  wire [7:0] _GEN_52 = 4'h3 == ronda ? 8'h8 : _GEN_51; // @[Cat.scala 30:58 Cat.scala 30:58]
+  wire [7:0] _GEN_53 = 4'h4 == ronda ? 8'h10 : _GEN_52; // @[Cat.scala 30:58 Cat.scala 30:58]
+  wire [7:0] _GEN_54 = 4'h5 == ronda ? 8'h20 : _GEN_53; // @[Cat.scala 30:58 Cat.scala 30:58]
+  wire [7:0] _GEN_55 = 4'h6 == ronda ? 8'h40 : _GEN_54; // @[Cat.scala 30:58 Cat.scala 30:58]
+  wire [7:0] _GEN_56 = 4'h7 == ronda ? 8'h80 : _GEN_55; // @[Cat.scala 30:58 Cat.scala 30:58]
+  wire [7:0] _GEN_57 = 4'h8 == ronda ? 8'h1b : _GEN_56; // @[Cat.scala 30:58 Cat.scala 30:58]
+  wire [7:0] _GEN_58 = 4'h9 == ronda ? 8'h36 : _GEN_57; // @[Cat.scala 30:58 Cat.scala 30:58]
+  wire [7:0] _GEN_59 = 4'ha == ronda ? 8'h6c : _GEN_58; // @[Cat.scala 30:58 Cat.scala 30:58]
+  wire [7:0] _GEN_60 = 4'hb == ronda ? 8'hd8 : _GEN_59; // @[Cat.scala 30:58 Cat.scala 30:58]
+  wire [7:0] _GEN_61 = 4'hc == ronda ? 8'h0 : _GEN_60; // @[Cat.scala 30:58 Cat.scala 30:58]
+  wire [7:0] _GEN_62 = 4'hd == ronda ? 8'h0 : _GEN_61; // @[Cat.scala 30:58 Cat.scala 30:58]
+  wire [7:0] _GEN_63 = 4'he == ronda ? 8'h0 : _GEN_62; // @[Cat.scala 30:58 Cat.scala 30:58]
+  wire [7:0] _GEN_64 = 4'hf == ronda ? 8'h0 : _GEN_63; // @[Cat.scala 30:58 Cat.scala 30:58]
+  wire [31:0] _T_58 = {_GEN_64,24'h0}; // @[Cat.scala 30:58]
   wire [31:0] _T_59 = _T_58 ^ cumbia; // @[aes.scala 115:50]
-  wire [31:0] put0 = _T_59 ^ rego_4; // @[aes.scala 115:59]
-  wire [31:0] put1 = put0 ^ rego_5; // @[aes.scala 116:25]
-  wire [31:0] put2 = put1 ^ rego_6; // @[aes.scala 117:25]
-  wire [31:0] put3 = put2 ^ rego_7; // @[aes.scala 118:25]
+  wire [31:0] put0 = _T_59 ^ reg1K0; // @[aes.scala 115:59]
+  wire [31:0] put1 = put0 ^ reg1K1; // @[aes.scala 116:25]
+  wire [31:0] put2 = put1 ^ reg1K2; // @[aes.scala 117:25]
+  wire [31:0] put3 = put2 ^ reg1K3; // @[aes.scala 118:25]
   wire  _T_60 = selKey == 2'h0; // @[aes.scala 121:31]
   wire  _T_61 = selKey == 2'h1; // @[aes.scala 122:43]
-  wire [31:0] _T_76 = _T_54 ? rego_7 : 32'h0; // @[Mux.scala 98:16]
-  wire [31:0] _T_77 = _T_53 ? rego_6 : _T_76; // @[Mux.scala 98:16]
-  wire [31:0] _T_78 = _T_52 ? rego_5 : _T_77; // @[Mux.scala 98:16]
-  wire [31:0] key_out = _T_51 ? rego_4 : _T_78; // @[Mux.scala 98:16]
+  wire [31:0] _T_76 = _T_54 ? reg1K3 : 32'h0; // @[Mux.scala 98:16]
+  wire [31:0] _T_77 = _T_53 ? reg1K2 : _T_76; // @[Mux.scala 98:16]
+  wire [31:0] _T_78 = _T_52 ? reg1K1 : _T_77; // @[Mux.scala 98:16]
+  wire [31:0] key_out = _T_51 ? reg1K0 : _T_78; // @[Mux.scala 98:16]
   wire [31:0] moduloARK = moduloMix_io_msg_out ^ key_out; // @[aes.scala 138:46]
-  wire [31:0] arkW0 = rego_0 ^ rego_4; // @[aes.scala 140:28]
-  wire [31:0] arkW1 = rego_1 ^ rego_5; // @[aes.scala 141:28]
-  wire [31:0] arkW2 = rego_2 ^ rego_6; // @[aes.scala 142:28]
-  wire [31:0] arkW3 = rego_3 ^ rego_7; // @[aes.scala 143:28]
+  wire [31:0] arkW0 = rego_0 ^ reg1K0; // @[aes.scala 140:28]
+  wire [31:0] arkW1 = rego_1 ^ reg1K1; // @[aes.scala 141:28]
+  wire [31:0] arkW2 = rego_2 ^ reg1K2; // @[aes.scala 142:28]
+  wire [31:0] arkW3 = rego_3 ^ reg1K3; // @[aes.scala 143:28]
   wire [31:0] auxiliary = key_out ^ moduloSbox_io_msg_out; // @[aes.scala 145:33]
   wire  _T_79 = selMux1W0 == 3'h0; // @[aes.scala 148:28]
   wire  _T_80 = selMux1W0 == 3'h1; // @[aes.scala 149:28]
@@ -1285,85 +1293,85 @@ module aes(
   wire  _T_173 = 4'h5 == state; // @[Conditional.scala 37:30]
   wire [3:0] _T_175 = ronda + 4'h1; // @[aes.scala 262:50]
   wire  _T_176 = 4'h6 == state; // @[Conditional.scala 37:30]
-  wire [3:0] _GEN_75 = ronda <= 4'h8 ? 4'h2 : 4'h7; // @[aes.scala 272:45 aes.scala 273:41 aes.scala 283:41]
-  wire [3:0] _GEN_76 = ronda <= 4'h8 ? ronda : 4'h0; // @[aes.scala 272:45 aes.scala 274:41 aes.scala 284:49]
-  wire [2:0] _GEN_77 = ronda <= 4'h8 ? 3'h1 : 3'h5; // @[aes.scala 272:45 aes.scala 275:49 aes.scala 285:49]
+  wire [3:0] _GEN_79 = ronda <= 4'h8 ? 4'h2 : 4'h7; // @[aes.scala 272:45 aes.scala 273:41 aes.scala 283:41]
+  wire [3:0] _GEN_80 = ronda <= 4'h8 ? ronda : 4'h0; // @[aes.scala 272:45 aes.scala 274:41 aes.scala 284:49]
+  wire [2:0] _GEN_81 = ronda <= 4'h8 ? 3'h1 : 3'h5; // @[aes.scala 272:45 aes.scala 275:49 aes.scala 285:49]
   wire  _T_178 = 4'h7 == state; // @[Conditional.scala 37:30]
   wire  _T_179 = 4'h8 == state; // @[Conditional.scala 37:30]
   wire  _T_180 = 4'h9 == state; // @[Conditional.scala 37:30]
   wire  _T_181 = 4'ha == state; // @[Conditional.scala 37:30]
-  wire [3:0] _GEN_79 = _T_181 ? 4'h0 : state; // @[Conditional.scala 39:67 aes.scala 328:33 aes.scala 34:28]
-  wire [3:0] _GEN_80 = _T_181 ? 4'h0 : ronda; // @[Conditional.scala 39:67 aes.scala 329:41 aes.scala 73:50]
-  wire [2:0] _GEN_81 = _T_181 ? 3'h0 : selMux1W0; // @[Conditional.scala 39:67 aes.scala 330:41 aes.scala 74:34]
-  wire [2:0] _GEN_82 = _T_181 ? 3'h0 : selMux1W1; // @[Conditional.scala 39:67 aes.scala 331:41 aes.scala 75:34]
-  wire [2:0] _GEN_83 = _T_181 ? 3'h0 : selMux1W2; // @[Conditional.scala 39:67 aes.scala 332:41 aes.scala 76:34]
-  wire [2:0] _GEN_84 = _T_181 ? 3'h0 : selMux1W3; // @[Conditional.scala 39:67 aes.scala 333:41 aes.scala 77:34]
-  wire [2:0] _GEN_85 = _T_181 ? 3'h4 : selMuxSbox; // @[Conditional.scala 39:67 aes.scala 334:41 aes.scala 78:34]
-  wire [1:0] _GEN_86 = _T_181 ? 2'h0 : selMuxMixARK; // @[Conditional.scala 39:67 aes.scala 335:37 aes.scala 79:34]
-  wire [1:0] _GEN_87 = _T_181 ? 2'h0 : selKey; // @[Conditional.scala 39:67 aes.scala 336:41 aes.scala 80:50]
-  wire [3:0] _GEN_88 = _T_180 ? 4'ha : _GEN_79; // @[Conditional.scala 39:67 aes.scala 317:41]
-  wire [3:0] _GEN_89 = _T_180 ? 4'h0 : _GEN_80; // @[Conditional.scala 39:67 aes.scala 318:41]
-  wire [2:0] _GEN_90 = _T_180 ? 3'h0 : _GEN_81; // @[Conditional.scala 39:67 aes.scala 319:41]
-  wire [2:0] _GEN_91 = _T_180 ? 3'h0 : _GEN_82; // @[Conditional.scala 39:67 aes.scala 320:41]
-  wire [2:0] _GEN_92 = _T_180 ? 3'h0 : _GEN_83; // @[Conditional.scala 39:67 aes.scala 321:41]
-  wire [2:0] _GEN_93 = _T_180 ? 3'h5 : _GEN_84; // @[Conditional.scala 39:67 aes.scala 322:41]
-  wire [2:0] _GEN_94 = _T_180 ? 3'h3 : _GEN_85; // @[Conditional.scala 39:67 aes.scala 323:41]
-  wire [1:0] _GEN_95 = _T_180 ? 2'h3 : _GEN_86; // @[Conditional.scala 39:67 aes.scala 324:37]
-  wire [1:0] _GEN_96 = _T_180 ? 2'h0 : _GEN_87; // @[Conditional.scala 39:67 aes.scala 325:41]
-  wire [3:0] _GEN_97 = _T_179 ? 4'h9 : _GEN_88; // @[Conditional.scala 39:67 aes.scala 306:41]
-  wire [3:0] _GEN_98 = _T_179 ? 4'h0 : _GEN_89; // @[Conditional.scala 39:67 aes.scala 307:41]
-  wire [2:0] _GEN_99 = _T_179 ? 3'h0 : _GEN_90; // @[Conditional.scala 39:67 aes.scala 308:41]
-  wire [2:0] _GEN_100 = _T_179 ? 3'h0 : _GEN_91; // @[Conditional.scala 39:67 aes.scala 309:41]
-  wire [2:0] _GEN_101 = _T_179 ? 3'h5 : _GEN_92; // @[Conditional.scala 39:67 aes.scala 310:41]
-  wire [2:0] _GEN_102 = _T_179 ? 3'h0 : _GEN_93; // @[Conditional.scala 39:67 aes.scala 311:41]
-  wire [2:0] _GEN_103 = _T_179 ? 3'h2 : _GEN_94; // @[Conditional.scala 39:67 aes.scala 312:41]
-  wire [1:0] _GEN_104 = _T_179 ? 2'h2 : _GEN_95; // @[Conditional.scala 39:67 aes.scala 313:37]
-  wire [1:0] _GEN_105 = _T_179 ? 2'h0 : _GEN_96; // @[Conditional.scala 39:67 aes.scala 314:41]
-  wire [3:0] _GEN_106 = _T_178 ? 4'h8 : _GEN_97; // @[Conditional.scala 39:67 aes.scala 295:41]
-  wire [3:0] _GEN_107 = _T_178 ? 4'h0 : _GEN_98; // @[Conditional.scala 39:67 aes.scala 296:41]
-  wire [2:0] _GEN_108 = _T_178 ? 3'h0 : _GEN_99; // @[Conditional.scala 39:67 aes.scala 297:41]
-  wire [2:0] _GEN_109 = _T_178 ? 3'h5 : _GEN_100; // @[Conditional.scala 39:67 aes.scala 298:41]
-  wire [2:0] _GEN_110 = _T_178 ? 3'h0 : _GEN_101; // @[Conditional.scala 39:67 aes.scala 299:41]
-  wire [2:0] _GEN_111 = _T_178 ? 3'h0 : _GEN_102; // @[Conditional.scala 39:67 aes.scala 300:41]
-  wire [2:0] _GEN_112 = _T_178 ? 3'h1 : _GEN_103; // @[Conditional.scala 39:67 aes.scala 301:41]
-  wire [1:0] _GEN_113 = _T_178 ? 2'h1 : _GEN_104; // @[Conditional.scala 39:67 aes.scala 302:37]
-  wire [1:0] _GEN_114 = _T_178 ? 2'h0 : _GEN_105; // @[Conditional.scala 39:67 aes.scala 303:41]
-  wire [3:0] _GEN_115 = _T_176 ? _GEN_75 : _GEN_106; // @[Conditional.scala 39:67]
-  wire [3:0] _GEN_116 = _T_176 ? _GEN_76 : _GEN_107; // @[Conditional.scala 39:67]
-  wire [2:0] _GEN_117 = _T_176 ? _GEN_77 : _GEN_108; // @[Conditional.scala 39:67]
-  wire [2:0] _GEN_118 = _T_176 ? 3'h0 : _GEN_109; // @[Conditional.scala 39:67]
-  wire [2:0] _GEN_119 = _T_176 ? 3'h0 : _GEN_110; // @[Conditional.scala 39:67]
-  wire [2:0] _GEN_120 = _T_176 ? 3'h0 : _GEN_111; // @[Conditional.scala 39:67]
-  wire [2:0] _GEN_121 = _T_176 ? 3'h0 : _GEN_112; // @[Conditional.scala 39:67]
-  wire [1:0] _GEN_122 = _T_176 ? 2'h0 : _GEN_113; // @[Conditional.scala 39:67]
-  wire [1:0] _GEN_123 = _T_176 ? 2'h0 : _GEN_114; // @[Conditional.scala 39:67]
-  wire [3:0] _GEN_124 = _T_173 ? 4'h6 : _GEN_115; // @[Conditional.scala 39:67 aes.scala 261:41]
-  wire [3:0] _GEN_125 = _T_173 ? _T_175 : _GEN_116; // @[Conditional.scala 39:67 aes.scala 262:41]
-  wire [2:0] _GEN_126 = _T_173 ? 3'h3 : _GEN_117; // @[Conditional.scala 39:67 aes.scala 263:41]
-  wire [2:0] _GEN_127 = _T_173 ? 3'h3 : _GEN_118; // @[Conditional.scala 39:67 aes.scala 264:41]
-  wire [2:0] _GEN_128 = _T_173 ? 3'h3 : _GEN_119; // @[Conditional.scala 39:67 aes.scala 265:41]
-  wire [2:0] _GEN_129 = _T_173 ? 3'h3 : _GEN_120; // @[Conditional.scala 39:67 aes.scala 266:41]
-  wire [2:0] _GEN_130 = _T_173 ? 3'h4 : _GEN_121; // @[Conditional.scala 39:67 aes.scala 267:41]
-  wire [1:0] _GEN_131 = _T_173 ? 2'h3 : _GEN_122; // @[Conditional.scala 39:67 aes.scala 268:37]
-  wire [1:0] _GEN_132 = _T_173 ? 2'h1 : _GEN_123; // @[Conditional.scala 39:67 aes.scala 269:41]
-  wire [3:0] _GEN_133 = _T_172 ? 4'h5 : _GEN_124; // @[Conditional.scala 39:67 aes.scala 250:41]
-  wire [3:0] _GEN_134 = _T_172 ? ronda : _GEN_125; // @[Conditional.scala 39:67 aes.scala 251:41]
-  wire [2:0] _GEN_135 = _T_172 ? 3'h0 : _GEN_126; // @[Conditional.scala 39:67 aes.scala 252:41]
-  wire [2:0] _GEN_136 = _T_172 ? 3'h0 : _GEN_127; // @[Conditional.scala 39:67 aes.scala 253:41]
-  wire [2:0] _GEN_137 = _T_172 ? 3'h2 : _GEN_128; // @[Conditional.scala 39:67 aes.scala 254:41]
-  wire [2:0] _GEN_138 = _T_172 ? 3'h1 : _GEN_129; // @[Conditional.scala 39:67 aes.scala 255:41]
-  wire [2:0] _GEN_139 = _T_172 ? 3'h3 : _GEN_130; // @[Conditional.scala 39:67 aes.scala 256:41]
-  wire [1:0] _GEN_140 = _T_172 ? 2'h2 : _GEN_131; // @[Conditional.scala 39:67 aes.scala 257:37]
-  wire [1:0] _GEN_141 = _T_172 ? 2'h0 : _GEN_132; // @[Conditional.scala 39:67 aes.scala 258:41]
-  wire [3:0] _GEN_142 = _T_171 ? 4'h4 : _GEN_133; // @[Conditional.scala 39:67 aes.scala 239:41]
-  wire [3:0] _GEN_143 = _T_171 ? ronda : _GEN_134; // @[Conditional.scala 39:67 aes.scala 240:41]
-  wire [2:0] _GEN_144 = _T_171 ? 3'h0 : _GEN_135; // @[Conditional.scala 39:67 aes.scala 241:41]
-  wire [2:0] _GEN_145 = _T_171 ? 3'h2 : _GEN_136; // @[Conditional.scala 39:67 aes.scala 242:41]
-  wire [2:0] _GEN_146 = _T_171 ? 3'h1 : _GEN_137; // @[Conditional.scala 39:67 aes.scala 243:41]
-  wire [2:0] _GEN_147 = _T_171 ? 3'h0 : _GEN_138; // @[Conditional.scala 39:67 aes.scala 244:41]
-  wire [2:0] _GEN_148 = _T_171 ? 3'h2 : _GEN_139; // @[Conditional.scala 39:67 aes.scala 245:41]
-  wire [1:0] _GEN_149 = _T_171 ? 2'h1 : _GEN_140; // @[Conditional.scala 39:67 aes.scala 246:37]
-  wire [1:0] _GEN_150 = _T_171 ? 2'h0 : _GEN_141; // @[Conditional.scala 39:67 aes.scala 247:41]
+  wire [3:0] _GEN_83 = _T_181 ? 4'h0 : state; // @[Conditional.scala 39:67 aes.scala 328:33 aes.scala 34:28]
+  wire [3:0] _GEN_84 = _T_181 ? 4'h0 : ronda; // @[Conditional.scala 39:67 aes.scala 329:41 aes.scala 73:50]
+  wire [2:0] _GEN_85 = _T_181 ? 3'h0 : selMux1W0; // @[Conditional.scala 39:67 aes.scala 330:41 aes.scala 74:34]
+  wire [2:0] _GEN_86 = _T_181 ? 3'h0 : selMux1W1; // @[Conditional.scala 39:67 aes.scala 331:41 aes.scala 75:34]
+  wire [2:0] _GEN_87 = _T_181 ? 3'h0 : selMux1W2; // @[Conditional.scala 39:67 aes.scala 332:41 aes.scala 76:34]
+  wire [2:0] _GEN_88 = _T_181 ? 3'h0 : selMux1W3; // @[Conditional.scala 39:67 aes.scala 333:41 aes.scala 77:34]
+  wire [2:0] _GEN_89 = _T_181 ? 3'h4 : selMuxSbox; // @[Conditional.scala 39:67 aes.scala 334:41 aes.scala 78:34]
+  wire [1:0] _GEN_90 = _T_181 ? 2'h0 : selMuxMixARK; // @[Conditional.scala 39:67 aes.scala 335:37 aes.scala 79:34]
+  wire [1:0] _GEN_91 = _T_181 ? 2'h0 : selKey; // @[Conditional.scala 39:67 aes.scala 336:41 aes.scala 80:50]
+  wire [3:0] _GEN_92 = _T_180 ? 4'ha : _GEN_83; // @[Conditional.scala 39:67 aes.scala 317:41]
+  wire [3:0] _GEN_93 = _T_180 ? 4'h0 : _GEN_84; // @[Conditional.scala 39:67 aes.scala 318:41]
+  wire [2:0] _GEN_94 = _T_180 ? 3'h0 : _GEN_85; // @[Conditional.scala 39:67 aes.scala 319:41]
+  wire [2:0] _GEN_95 = _T_180 ? 3'h0 : _GEN_86; // @[Conditional.scala 39:67 aes.scala 320:41]
+  wire [2:0] _GEN_96 = _T_180 ? 3'h0 : _GEN_87; // @[Conditional.scala 39:67 aes.scala 321:41]
+  wire [2:0] _GEN_97 = _T_180 ? 3'h5 : _GEN_88; // @[Conditional.scala 39:67 aes.scala 322:41]
+  wire [2:0] _GEN_98 = _T_180 ? 3'h3 : _GEN_89; // @[Conditional.scala 39:67 aes.scala 323:41]
+  wire [1:0] _GEN_99 = _T_180 ? 2'h3 : _GEN_90; // @[Conditional.scala 39:67 aes.scala 324:37]
+  wire [1:0] _GEN_100 = _T_180 ? 2'h0 : _GEN_91; // @[Conditional.scala 39:67 aes.scala 325:41]
+  wire [3:0] _GEN_101 = _T_179 ? 4'h9 : _GEN_92; // @[Conditional.scala 39:67 aes.scala 306:41]
+  wire [3:0] _GEN_102 = _T_179 ? 4'h0 : _GEN_93; // @[Conditional.scala 39:67 aes.scala 307:41]
+  wire [2:0] _GEN_103 = _T_179 ? 3'h0 : _GEN_94; // @[Conditional.scala 39:67 aes.scala 308:41]
+  wire [2:0] _GEN_104 = _T_179 ? 3'h0 : _GEN_95; // @[Conditional.scala 39:67 aes.scala 309:41]
+  wire [2:0] _GEN_105 = _T_179 ? 3'h5 : _GEN_96; // @[Conditional.scala 39:67 aes.scala 310:41]
+  wire [2:0] _GEN_106 = _T_179 ? 3'h0 : _GEN_97; // @[Conditional.scala 39:67 aes.scala 311:41]
+  wire [2:0] _GEN_107 = _T_179 ? 3'h2 : _GEN_98; // @[Conditional.scala 39:67 aes.scala 312:41]
+  wire [1:0] _GEN_108 = _T_179 ? 2'h2 : _GEN_99; // @[Conditional.scala 39:67 aes.scala 313:37]
+  wire [1:0] _GEN_109 = _T_179 ? 2'h0 : _GEN_100; // @[Conditional.scala 39:67 aes.scala 314:41]
+  wire [3:0] _GEN_110 = _T_178 ? 4'h8 : _GEN_101; // @[Conditional.scala 39:67 aes.scala 295:41]
+  wire [3:0] _GEN_111 = _T_178 ? 4'h0 : _GEN_102; // @[Conditional.scala 39:67 aes.scala 296:41]
+  wire [2:0] _GEN_112 = _T_178 ? 3'h0 : _GEN_103; // @[Conditional.scala 39:67 aes.scala 297:41]
+  wire [2:0] _GEN_113 = _T_178 ? 3'h5 : _GEN_104; // @[Conditional.scala 39:67 aes.scala 298:41]
+  wire [2:0] _GEN_114 = _T_178 ? 3'h0 : _GEN_105; // @[Conditional.scala 39:67 aes.scala 299:41]
+  wire [2:0] _GEN_115 = _T_178 ? 3'h0 : _GEN_106; // @[Conditional.scala 39:67 aes.scala 300:41]
+  wire [2:0] _GEN_116 = _T_178 ? 3'h1 : _GEN_107; // @[Conditional.scala 39:67 aes.scala 301:41]
+  wire [1:0] _GEN_117 = _T_178 ? 2'h1 : _GEN_108; // @[Conditional.scala 39:67 aes.scala 302:37]
+  wire [1:0] _GEN_118 = _T_178 ? 2'h0 : _GEN_109; // @[Conditional.scala 39:67 aes.scala 303:41]
+  wire [3:0] _GEN_119 = _T_176 ? _GEN_79 : _GEN_110; // @[Conditional.scala 39:67]
+  wire [3:0] _GEN_120 = _T_176 ? _GEN_80 : _GEN_111; // @[Conditional.scala 39:67]
+  wire [2:0] _GEN_121 = _T_176 ? _GEN_81 : _GEN_112; // @[Conditional.scala 39:67]
+  wire [2:0] _GEN_122 = _T_176 ? 3'h0 : _GEN_113; // @[Conditional.scala 39:67]
+  wire [2:0] _GEN_123 = _T_176 ? 3'h0 : _GEN_114; // @[Conditional.scala 39:67]
+  wire [2:0] _GEN_124 = _T_176 ? 3'h0 : _GEN_115; // @[Conditional.scala 39:67]
+  wire [2:0] _GEN_125 = _T_176 ? 3'h0 : _GEN_116; // @[Conditional.scala 39:67]
+  wire [1:0] _GEN_126 = _T_176 ? 2'h0 : _GEN_117; // @[Conditional.scala 39:67]
+  wire [1:0] _GEN_127 = _T_176 ? 2'h0 : _GEN_118; // @[Conditional.scala 39:67]
+  wire [3:0] _GEN_128 = _T_173 ? 4'h6 : _GEN_119; // @[Conditional.scala 39:67 aes.scala 261:41]
+  wire [3:0] _GEN_129 = _T_173 ? _T_175 : _GEN_120; // @[Conditional.scala 39:67 aes.scala 262:41]
+  wire [2:0] _GEN_130 = _T_173 ? 3'h3 : _GEN_121; // @[Conditional.scala 39:67 aes.scala 263:41]
+  wire [2:0] _GEN_131 = _T_173 ? 3'h3 : _GEN_122; // @[Conditional.scala 39:67 aes.scala 264:41]
+  wire [2:0] _GEN_132 = _T_173 ? 3'h3 : _GEN_123; // @[Conditional.scala 39:67 aes.scala 265:41]
+  wire [2:0] _GEN_133 = _T_173 ? 3'h3 : _GEN_124; // @[Conditional.scala 39:67 aes.scala 266:41]
+  wire [2:0] _GEN_134 = _T_173 ? 3'h4 : _GEN_125; // @[Conditional.scala 39:67 aes.scala 267:41]
+  wire [1:0] _GEN_135 = _T_173 ? 2'h3 : _GEN_126; // @[Conditional.scala 39:67 aes.scala 268:37]
+  wire [1:0] _GEN_136 = _T_173 ? 2'h1 : _GEN_127; // @[Conditional.scala 39:67 aes.scala 269:41]
+  wire [3:0] _GEN_137 = _T_172 ? 4'h5 : _GEN_128; // @[Conditional.scala 39:67 aes.scala 250:41]
+  wire [3:0] _GEN_138 = _T_172 ? ronda : _GEN_129; // @[Conditional.scala 39:67 aes.scala 251:41]
+  wire [2:0] _GEN_139 = _T_172 ? 3'h0 : _GEN_130; // @[Conditional.scala 39:67 aes.scala 252:41]
+  wire [2:0] _GEN_140 = _T_172 ? 3'h0 : _GEN_131; // @[Conditional.scala 39:67 aes.scala 253:41]
+  wire [2:0] _GEN_141 = _T_172 ? 3'h2 : _GEN_132; // @[Conditional.scala 39:67 aes.scala 254:41]
+  wire [2:0] _GEN_142 = _T_172 ? 3'h1 : _GEN_133; // @[Conditional.scala 39:67 aes.scala 255:41]
+  wire [2:0] _GEN_143 = _T_172 ? 3'h3 : _GEN_134; // @[Conditional.scala 39:67 aes.scala 256:41]
+  wire [1:0] _GEN_144 = _T_172 ? 2'h2 : _GEN_135; // @[Conditional.scala 39:67 aes.scala 257:37]
+  wire [1:0] _GEN_145 = _T_172 ? 2'h0 : _GEN_136; // @[Conditional.scala 39:67 aes.scala 258:41]
+  wire [3:0] _GEN_146 = _T_171 ? 4'h4 : _GEN_137; // @[Conditional.scala 39:67 aes.scala 239:41]
+  wire [3:0] _GEN_147 = _T_171 ? ronda : _GEN_138; // @[Conditional.scala 39:67 aes.scala 240:41]
+  wire [2:0] _GEN_148 = _T_171 ? 3'h0 : _GEN_139; // @[Conditional.scala 39:67 aes.scala 241:41]
+  wire [2:0] _GEN_149 = _T_171 ? 3'h2 : _GEN_140; // @[Conditional.scala 39:67 aes.scala 242:41]
+  wire [2:0] _GEN_150 = _T_171 ? 3'h1 : _GEN_141; // @[Conditional.scala 39:67 aes.scala 243:41]
+  wire [2:0] _GEN_151 = _T_171 ? 3'h0 : _GEN_142; // @[Conditional.scala 39:67 aes.scala 244:41]
+  wire [2:0] _GEN_152 = _T_171 ? 3'h2 : _GEN_143; // @[Conditional.scala 39:67 aes.scala 245:41]
+  wire [1:0] _GEN_153 = _T_171 ? 2'h1 : _GEN_144; // @[Conditional.scala 39:67 aes.scala 246:37]
+  wire [1:0] _GEN_154 = _T_171 ? 2'h0 : _GEN_145; // @[Conditional.scala 39:67 aes.scala 247:41]
   sbox moduloSbox ( // @[aes.scala 105:32]
     .io_msg(moduloSbox_io_msg),
     .io_msg_out(moduloSbox_io_msg_out)
@@ -1439,14 +1447,6 @@ module aes(
     end
     if (reset) begin // @[aes.scala 25:26]
       rego_4 <= 32'h0; // @[aes.scala 25:26]
-    end else if (busy) begin // @[aes.scala 178:19]
-      if (!(_T_60)) begin // @[Mux.scala 98:16]
-        if (_T_61) begin // @[Mux.scala 98:16]
-          rego_4 <= put0;
-        end else begin
-          rego_4 <= 32'h0;
-        end
-      end
     end else if (valid & io_wbs_we_i) begin // @[aes.scala 56:30]
       if (4'h4 == addr) begin // @[aes.scala 57:44]
         rego_4 <= _T_36; // @[aes.scala 57:44]
@@ -1454,14 +1454,6 @@ module aes(
     end
     if (reset) begin // @[aes.scala 25:26]
       rego_5 <= 32'h0; // @[aes.scala 25:26]
-    end else if (busy) begin // @[aes.scala 178:19]
-      if (!(_T_60)) begin // @[Mux.scala 98:16]
-        if (_T_61) begin // @[Mux.scala 98:16]
-          rego_5 <= put1;
-        end else begin
-          rego_5 <= 32'h0;
-        end
-      end
     end else if (valid & io_wbs_we_i) begin // @[aes.scala 56:30]
       if (4'h5 == addr) begin // @[aes.scala 57:44]
         rego_5 <= _T_36; // @[aes.scala 57:44]
@@ -1469,14 +1461,6 @@ module aes(
     end
     if (reset) begin // @[aes.scala 25:26]
       rego_6 <= 32'h0; // @[aes.scala 25:26]
-    end else if (busy) begin // @[aes.scala 178:19]
-      if (!(_T_60)) begin // @[Mux.scala 98:16]
-        if (_T_61) begin // @[Mux.scala 98:16]
-          rego_6 <= put2;
-        end else begin
-          rego_6 <= 32'h0;
-        end
-      end
     end else if (valid & io_wbs_we_i) begin // @[aes.scala 56:30]
       if (4'h6 == addr) begin // @[aes.scala 57:44]
         rego_6 <= _T_36; // @[aes.scala 57:44]
@@ -1484,14 +1468,6 @@ module aes(
     end
     if (reset) begin // @[aes.scala 25:26]
       rego_7 <= 32'h0; // @[aes.scala 25:26]
-    end else if (busy) begin // @[aes.scala 178:19]
-      if (!(_T_60)) begin // @[Mux.scala 98:16]
-        if (_T_61) begin // @[Mux.scala 98:16]
-          rego_7 <= put3;
-        end else begin
-          rego_7 <= 32'h0;
-        end
-      end
     end else if (valid & io_wbs_we_i) begin // @[aes.scala 56:30]
       if (4'h7 == addr) begin // @[aes.scala 57:44]
         rego_7 <= _T_36; // @[aes.scala 57:44]
@@ -1519,7 +1495,7 @@ module aes(
     end else if (_T_170) begin // @[Conditional.scala 39:67]
       state <= 4'h3; // @[aes.scala 228:41]
     end else begin
-      state <= _GEN_142;
+      state <= _GEN_146;
     end
     ack <= io_wbs_stb_i & io_wbs_cyc_i & _T_166 & _T_26 == 32'h30000000; // @[aes.scala 50:57]
     if (valid & ~io_wbs_we_i) begin // @[aes.scala 63:31]
@@ -1541,7 +1517,7 @@ module aes(
       ronda <= 4'h0;
     end else if (!(_T_169)) begin // @[Conditional.scala 39:67]
       if (!(_T_170)) begin // @[Conditional.scala 39:67]
-        ronda <= _GEN_143;
+        ronda <= _GEN_147;
       end
     end
     if (reset) begin // @[aes.scala 74:34]
@@ -1557,7 +1533,7 @@ module aes(
     end else if (_T_170) begin // @[Conditional.scala 39:67]
       selMux1W0 <= 3'h2; // @[aes.scala 230:41]
     end else begin
-      selMux1W0 <= _GEN_144;
+      selMux1W0 <= _GEN_148;
     end
     if (reset) begin // @[aes.scala 75:34]
       selMux1W1 <= 3'h5; // @[aes.scala 75:34]
@@ -1572,7 +1548,7 @@ module aes(
     end else if (_T_170) begin // @[Conditional.scala 39:67]
       selMux1W1 <= 3'h1; // @[aes.scala 231:41]
     end else begin
-      selMux1W1 <= _GEN_145;
+      selMux1W1 <= _GEN_149;
     end
     if (reset) begin // @[aes.scala 76:34]
       selMux1W2 <= 3'h5; // @[aes.scala 76:34]
@@ -1587,7 +1563,7 @@ module aes(
     end else if (_T_170) begin // @[Conditional.scala 39:67]
       selMux1W2 <= 3'h0; // @[aes.scala 232:41]
     end else begin
-      selMux1W2 <= _GEN_146;
+      selMux1W2 <= _GEN_150;
     end
     if (reset) begin // @[aes.scala 77:34]
       selMux1W3 <= 3'h5; // @[aes.scala 77:34]
@@ -1602,7 +1578,7 @@ module aes(
     end else if (_T_170) begin // @[Conditional.scala 39:67]
       selMux1W3 <= 3'h0; // @[aes.scala 233:41]
     end else begin
-      selMux1W3 <= _GEN_147;
+      selMux1W3 <= _GEN_151;
     end
     if (reset) begin // @[aes.scala 78:34]
       selMuxSbox <= 3'h4; // @[aes.scala 78:34]
@@ -1613,7 +1589,7 @@ module aes(
     end else if (_T_170) begin // @[Conditional.scala 39:67]
       selMuxSbox <= 3'h1; // @[aes.scala 234:41]
     end else begin
-      selMuxSbox <= _GEN_148;
+      selMuxSbox <= _GEN_152;
     end
     if (reset) begin // @[aes.scala 79:34]
       selMuxMixARK <= 2'h0; // @[aes.scala 79:34]
@@ -1624,7 +1600,7 @@ module aes(
     end else if (_T_170) begin // @[Conditional.scala 39:67]
       selMuxMixARK <= 2'h0; // @[aes.scala 235:37]
     end else begin
-      selMuxMixARK <= _GEN_149;
+      selMuxMixARK <= _GEN_153;
     end
     if (reset) begin // @[aes.scala 80:50]
       selKey <= 2'h0; // @[aes.scala 80:50]
@@ -1635,7 +1611,59 @@ module aes(
     end else if (_T_170) begin // @[Conditional.scala 39:67]
       selKey <= 2'h0; // @[aes.scala 236:41]
     end else begin
-      selKey <= _GEN_150;
+      selKey <= _GEN_154;
+    end
+    if (reset) begin // @[Reg.scala 27:20]
+      reg1K0 <= 32'h0; // @[Reg.scala 27:20]
+    end else if (busy) begin // @[aes.scala 178:19]
+      if (!(_T_60)) begin // @[Mux.scala 98:16]
+        if (_T_61) begin // @[Mux.scala 98:16]
+          reg1K0 <= put0;
+        end else begin
+          reg1K0 <= 32'h0;
+        end
+      end
+    end else begin
+      reg1K0 <= rego_4;
+    end
+    if (reset) begin // @[Reg.scala 27:20]
+      reg1K1 <= 32'h0; // @[Reg.scala 27:20]
+    end else if (busy) begin // @[aes.scala 178:19]
+      if (!(_T_60)) begin // @[Mux.scala 98:16]
+        if (_T_61) begin // @[Mux.scala 98:16]
+          reg1K1 <= put1;
+        end else begin
+          reg1K1 <= 32'h0;
+        end
+      end
+    end else begin
+      reg1K1 <= rego_5;
+    end
+    if (reset) begin // @[Reg.scala 27:20]
+      reg1K2 <= 32'h0; // @[Reg.scala 27:20]
+    end else if (busy) begin // @[aes.scala 178:19]
+      if (!(_T_60)) begin // @[Mux.scala 98:16]
+        if (_T_61) begin // @[Mux.scala 98:16]
+          reg1K2 <= put2;
+        end else begin
+          reg1K2 <= 32'h0;
+        end
+      end
+    end else begin
+      reg1K2 <= rego_6;
+    end
+    if (reset) begin // @[Reg.scala 27:20]
+      reg1K3 <= 32'h0; // @[Reg.scala 27:20]
+    end else if (busy) begin // @[aes.scala 178:19]
+      if (!(_T_60)) begin // @[Mux.scala 98:16]
+        if (_T_61) begin // @[Mux.scala 98:16]
+          reg1K3 <= put3;
+        end else begin
+          reg1K3 <= 32'h0;
+        end
+      end
+    end else begin
+      reg1K3 <= rego_7;
     end
     cumbia <= moduloSbox_io_msg_out; // @[aes.scala 110:29]
     if (reset) begin // @[aes.scala 176:46]
@@ -1721,9 +1749,17 @@ initial begin
   _RAND_19 = {1{`RANDOM}};
   selKey = _RAND_19[1:0];
   _RAND_20 = {1{`RANDOM}};
-  cumbia = _RAND_20[31:0];
+  reg1K0 = _RAND_20[31:0];
   _RAND_21 = {1{`RANDOM}};
-  REG_1 = _RAND_21[0:0];
+  reg1K1 = _RAND_21[31:0];
+  _RAND_22 = {1{`RANDOM}};
+  reg1K2 = _RAND_22[31:0];
+  _RAND_23 = {1{`RANDOM}};
+  reg1K3 = _RAND_23[31:0];
+  _RAND_24 = {1{`RANDOM}};
+  cumbia = _RAND_24[31:0];
+  _RAND_25 = {1{`RANDOM}};
+  REG_1 = _RAND_25[0:0];
 `endif // RANDOMIZE_REG_INIT
   `endif // RANDOMIZE
 end // initial

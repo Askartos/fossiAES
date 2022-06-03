@@ -15,7 +15,7 @@ import chisel3.util._
 
 
 class aes (val addrlen : Int ,val base:BigInt) extends Module{
-	val selector: Boolean = false // true for more key regs, false charge the key everytime
+	val selector: Boolean = true // true for more key regs, false charge the key everytime
 	val io = IO(new whishbone_slave)
 	
 	
