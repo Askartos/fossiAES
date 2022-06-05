@@ -42,7 +42,7 @@ module aes_test_tb;
 	initial begin
 		clock = 0;
 	end
-  parameter ncycles= 1000;
+  parameter ncycles= 70;
 	initial begin
 		$dumpfile("aes_test.vcd");
 		$dumpvars(0, aes_test_tb);

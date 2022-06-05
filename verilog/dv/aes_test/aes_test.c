@@ -19,6 +19,12 @@ void aes_crypt(int* key, int* word){
 	aes[8] = 0x1;
 	
 	while(aes[9]==0x00000000); //aes finish
+	
+	//Word
+	word[0] = aes[0];
+  word[1] = aes[1];
+	word[2] = aes[2];
+	word[3] = aes[3]; 
 }
 
 void caravel_setup(){
@@ -56,37 +62,40 @@ void caravel_setup(){
 
 void main(int argc, char** argv) {	
   caravel_setup();
+
+//AES HARDWARE 
 	int key[] = {0x00010203, 0x04050607, 0x08090a0b, 0x0c0d0e0f};
 	int word[] = {0x00112233, 0x44556677, 0x8899aabb, 0xccddeeff};
 	aes_crypt(key , word);
-  uint8_t i, j;
-  for (i = 0; i < 4; ++i)
-  {
-    for (j = 0; j < 4; ++j)
-    {
-     // (*state)[j][i] = getSBoxValue((*state)[j][i]);
-    }
-  }
+
 	reg_mprj_datal = 0xCAFE0000;
 
+//AES SOFTWARE
 	struct AES_ctx ctx;
-	uint8_t aeskey[] = { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f };
-	uint8_t str[] = { 0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88, 0x99, 0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff };
-	reg_mprj_datal = 0x12340000;
-	reg_mprj_datal = 0xBEEF0000;
+	uint8_t aeskey[]	= { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f };
+	uint8_t str[] 		= { 0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88, 0x99, 0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff };
 	AES_init_ctx(&ctx, aeskey);
-	
-	reg_mprj_datal = 0x12340000;
-	reg_mprj_datal = 0xBEEF0000;
-	AES_CBC_encrypt_buffer(&ctx, str, 16);
-
-	int k;
-	for ( k= 0; k < 16; ++k) {
-   		reg_mprj_datal = (int)str[i];
+	AES_ECB_encrypt(&ctx, str);
+  
+ reg_mprj_datal= 0;
+ bool pass=true;
+ char count=0;	    
+ int a,b;
+ uint8_t i, k;	
+	for ( k= 0; (k < 4) && pass; ++k) {	
+		for ( i= 3; (i >= 0) && pass; --i) {
+	      reg_mprj_datal = a = (( word[k] >> i*8 ) & 0xFF) << 24;
+	      reg_mprj_datal = 0;
+   			reg_mprj_datal = b = ((int) str[count])					<< 24;
+				if(a!=b) pass	 = false;
+				count++;
+	 	}
 	}
-
+	
+	
+ 
 	// Flag end of the test
-	reg_mprj_datal = 0xAB610000;
+	if(pass) reg_mprj_datal = 0xAB610000;
 
 }
 

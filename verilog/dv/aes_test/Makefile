@@ -24,11 +24,13 @@ BLOCKS := $(shell basename $(PWDD))
 CONFIG = caravel_user_project
 
 
+
 include $(MCW_ROOT)/verilog/dv/make/env.makefile
 include $(MCW_ROOT)/verilog/dv/make/var.makefile
 include $(MCW_ROOT)/verilog/dv/make/cpu.makefile
-SOURCE_FILES := $(SOURCE_FILES) $(shell pwd)/tiny-AES-c/aes.c
-$(info SOURCE_FILES=$(SOURCE_FILES) )
+
+SOURCE_FILES  := $(SOURCE_FILES) $(shell pwd)/tiny-AES-c_lite/aes.c
+
 include $(MCW_ROOT)/verilog/dv/make/sim.makefile
 
 

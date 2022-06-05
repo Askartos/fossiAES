@@ -28,20 +28,20 @@ set ::env(DESIGN_IS_CORE) 0
 
 set ::env(CLOCK_PORT) "clock"
 set ::env(CLOCK_NET) "aes.clock"
-set ::env(CLOCK_PERIOD) "50"
+set ::env(CLOCK_PERIOD) "15"
 
 
 #Specifies a time margin for the slack when fixing hold violations. 
 #Normally the resizer will stop when it reaches zero slack.
 # This option allows you to overfix. (Default: 0.1ns)
 
-set ::env(GLB_RESIZER_HOLD_SLACK_MARGIN) {0.6}
-set ::env(PL_RESIZER_HOLD_SLACK_MARGIN) {0.6}
+set ::env(GLB_RESIZER_HOLD_SLACK_MARGIN) {0.9}
+set ::env(PL_RESIZER_HOLD_SLACK_MARGIN) {0.9}
 
 #area
 
 set ::env(FP_SIZING) absolute
-set ::env(DIE_AREA) "0 0 800 1000"
+set ::env(DIE_AREA) "0 0 800 800"
 set ::env(PL_TARGET_DENSITY) 0.3
 #set ::env(PL_BASIC_PLACEMENT) 1
 set ::env(GLB_RT_ALLOW_CONGESTION) 1
@@ -63,6 +63,6 @@ set ::env(RT_MAX_LAYER) {met4}
 set ::env(VDD_NETS) [list {vccd1}]
 set ::env(GND_NETS) [list {vssd1}]
 
-set ::env(DIODE_INSERTION_STRATEGY) 4 
+set ::env(DIODE_INSERTION_STRATEGY) 1 
 # If you're going to use multiple power domains, then disable cvc run.
 set ::env(RUN_CVC) 1
