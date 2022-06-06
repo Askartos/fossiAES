@@ -83,7 +83,7 @@ void main(int argc, char** argv) {
  int a,b;
  uint8_t i, k;	
 	for ( k= 0; (k < 4) && pass; ++k) {	
-		for ( i= 3; (i >= 0) && pass; --i) {
+		for ( i= 3; (i != 255) && pass; --i) {
 	      reg_mprj_datal = a = (( word[k] >> i*8 ) & 0xFF) << 24;
 	      reg_mprj_datal = 0;
    			reg_mprj_datal = b = ((int) str[count])					<< 24;
@@ -96,6 +96,7 @@ void main(int argc, char** argv) {
  
 	// Flag end of the test
 	if(pass) reg_mprj_datal = 0xAB610000;
+	else reg_mprj_datal = 0xDEAD0000;
 
 }
 

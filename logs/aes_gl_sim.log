@@ -1,0 +1,18 @@
+docker pull efabless/dv_setup:latest
+latest: Pulling from efabless/dv_setup
+Digest: sha256:6016348210ed5610a4b858008db0ed7e85f99f32b7f633d84329a8ec9dc81e4a
+Status: Image is up to date for efabless/dv_setup:latest
+docker.io/efabless/dv_setup:latest
+docker run -v /home/askartos/sandbox/caravel_tutorial/fossiAES:/home/askartos/sandbox/caravel_tutorial/fossiAES -v /home/askartos/sandbox/caravel_tutorial/pdks:/home/askartos/sandbox/caravel_tutorial/pdks -v /home/askartos/sandbox/caravel_tutorial/fossiAES/caravel:/home/askartos/sandbox/caravel_tutorial/fossiAES/caravel -e TARGET_PATH=/home/askartos/sandbox/caravel_tutorial/fossiAES -e PDK_ROOT=/home/askartos/sandbox/caravel_tutorial/pdks -e CARAVEL_ROOT=/home/askartos/sandbox/caravel_tutorial/fossiAES/caravel -e TOOLS=/opt/riscv32i -e DESIGNS=/home/askartos/sandbox/caravel_tutorial/fossiAES -e CORE_VERILOG_PATH=/home/askartos/sandbox/caravel_tutorial/fossiAES/mgmt_core_wrapper/verilog -e GCC_PREFIX=riscv32-unknown-elf -e MCW_ROOT=/home/askartos/sandbox/caravel_tutorial/fossiAES/mgmt_core_wrapper -u $(id -u $USER):$(id -g $USER) efabless/dv_setup:latest sh -c "cd /home/askartos/sandbox/caravel_tutorial/fossiAES/verilog/dv/aes_test && export SIM=GL && make"
+iverilog -Ttyp -DFUNCTIONAL -DGL -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
+        -f/home/askartos/sandbox/caravel_tutorial/fossiAES/mgmt_core_wrapper/verilog/includes/includes.gl.caravel \
+        -f/home/askartos/sandbox/caravel_tutorial/fossiAES/verilog/includes/includes.gl.caravel_user_project -o aes_test.vvp aes_test_tb.v
+vvp  aes_test.vvp
+Reading aes_test.hex
+aes_test.hex loaded into memory
+Memory 5 bytes = 0x6f 0x00 0x00 0x0b 0x13
+FST info: dumpfile aes_test.vcd opened for output.
+Monitor: MPRJ-Logic AES Started
+Monitor: Mega-Project AES (GL) Passed
+mv aes_test.vcd GL-aes_test.vcd
+rm aes_test.vvp

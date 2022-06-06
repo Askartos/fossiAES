@@ -35,8 +35,8 @@ set ::env(CLOCK_PERIOD) "15"
 #Normally the resizer will stop when it reaches zero slack.
 # This option allows you to overfix. (Default: 0.1ns)
 
-set ::env(GLB_RESIZER_HOLD_SLACK_MARGIN) {0.9}
-set ::env(PL_RESIZER_HOLD_SLACK_MARGIN) {0.9}
+set ::env(GLB_RESIZER_HOLD_SLACK_MARGIN) {1}
+set ::env(PL_RESIZER_HOLD_SLACK_MARGIN) {1}
 
 #area
 
@@ -63,6 +63,9 @@ set ::env(RT_MAX_LAYER) {met4}
 set ::env(VDD_NETS) [list {vccd1}]
 set ::env(GND_NETS) [list {vssd1}]
 
-set ::env(DIODE_INSERTION_STRATEGY) 1 
+set ::env(DIODE_INSERTION_STRATEGY) 4
+set ::env(GLB_RT_MAX_DIODE_INS_ITERS) 3
+
+ 
 # If you're going to use multiple power domains, then disable cvc run.
 set ::env(RUN_CVC) 1

@@ -42,7 +42,7 @@ module aes_test_tb;
 	initial begin
 		clock = 0;
 	end
-  parameter ncycles= 70;
+  parameter ncycles= 10000;
 	initial begin
 		$dumpfile("aes_test.vcd");
 		$dumpvars(0, aes_test_tb);
@@ -66,13 +66,22 @@ module aes_test_tb;
 	initial begin
 	   wait(checkbits == 16'hAB60);
 		$display("Monitor: MPRJ-Logic AES Started");
-		wait(checkbits == 16'hAB61);
-		`ifdef GL
-	    	$display("Monitor: Mega-Project AES (GL) Passed");
-		`else
-		    $display("Monitor: Mega-Project AES (RTL) Passed");
-		`endif
-	    $finish;
+		wait( (checkbits == 16'hAB61) | (checkbits == 16'hDEAD));
+    if(checkbits == 16'hAB61) begin
+			`ifdef GL
+			  	$display("Monitor: Mega-Project AES (GL) Passed");
+			`else
+				  $display("Monitor: Mega-Project AES (RTL) Passed");
+			`endif
+		end
+		else begin
+			`ifdef GL
+			  	$display("Monitor: Mega-Project AES (GL) FAIL");
+			`else
+				  $display("Monitor: Mega-Project AES (RTL) FAIL");
+			`endif
+		end
+	  $finish;
 	end
 
 	initial begin
