@@ -57,4 +57,5 @@ The functionality was validated against software implementation Tiny-AES library
         cd verilog/rtl/aes
         ./run_chisel.sh
 # Layout 
- ![aes layout](https://user-images.githubusercontent.com/51058246/172275663-874547e4-fd52-4aba-95c7-f59819a14b95.png)
+![final_layout](https://user-images.githubusercontent.com/51058246/172377979-e42c2293-6e49-4b4f-b249-963d19f71cc6.png)
+
