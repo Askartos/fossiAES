@@ -56,5 +56,5 @@ The functionality was validated against software implementation Tiny-AES library
         modify the scala files verilog/rtl/aes/src/main/scala/* if needed
         cd verilog/rtl/aes
         ./run_chisel.sh
-
- 
+# Layout 
+ ![aes layout](https://user-images.githubusercontent.com/51058246/172275663-874547e4-fd52-4aba-95c7-f59819a14b95.png)
