@@ -6,7 +6,7 @@
 void aes_crypt(int* key, int* word){
 	//Word
 	aes[0] = word[0];
-  aes[1] = word[1];
+  	aes[1] = word[1];
 	aes[2] = word[2];
 	aes[3] = word[3]; 
 	//Key
@@ -22,7 +22,7 @@ void aes_crypt(int* key, int* word){
 	
 	//Word
 	word[0] = aes[0];
-  word[1] = aes[1];
+	word[1] = aes[1];
 	word[2] = aes[2];
 	word[3] = aes[3]; 
 }
