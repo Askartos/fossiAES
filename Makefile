@@ -62,7 +62,7 @@ simenv:
 
 .PHONY: setup
 setup: install check-env install_mcw openlane pdk-with-volare
-
+	ln -s $(shell pwd)/verilog/dv/aes_test/tiny-AES-c_lite/aes.h $(shell pwd)/mgmt_core_wrapper/verilog/dv/firmware/aes.h
 # Openlane
 blocks=$(shell cd openlane && find * -maxdepth 0 -type d)
 .PHONY: $(blocks)
