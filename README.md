@@ -4,7 +4,7 @@ Hardware implementation of the ECB mode of advanced encryption standard (AES) 12
 
 ![aes diagram](https://user-images.githubusercontent.com/51058246/172271861-db12ddd8-03e9-4202-89fd-bdb0ac956a37.png)
 
-The functionality was validated against software implementation Tiny-AES library (https://github.com/kokke/tiny-AES-c), running on the caravel core (VexRiscv). The simulation results not only show that the block works, but also show a 100000X improvement in terms of encryption rate.
+The functionality was validated against software implementation Tiny-AES library (https://github.com/kokke/tiny-AES-c), running on the caravel core (VexRiscv). The simulation results not only show that the block works, but also show a 100000X improvement in terms of encryption rate. (102.4 Mbps  vs 1.023 Kbps)
 
 # Registers Map:
         Address   regiser
