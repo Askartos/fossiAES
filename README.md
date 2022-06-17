@@ -52,10 +52,15 @@ The functionality was validated against software implementation Tiny-AES library
           aes_crypt(key , word);
         }
 # to re-generate for the verilog aes
-        need to have sbt installed on your system
+        need to have sbt installed on your system https://www.scala-sbt.org/1.x/docs/Installing-sbt-on-Linux.html
         modify the scala files verilog/rtl/aes/src/main/scala/* if needed
         cd verilog/rtl/aes
         ./run_chisel.sh
+
+# to run the aes test
+        You have to run make setup after cloning the repo, that will also enable Tiny-AES library usage.
+        make verify-aes_test-rtl
+        
 # Layout 
 ![final_layout](https://user-images.githubusercontent.com/51058246/172377979-e42c2293-6e49-4b4f-b249-963d19f71cc6.png)
 
