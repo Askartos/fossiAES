@@ -61,6 +61,11 @@ The functionality was validated against software implementation Tiny-AES library
         You have to run make setup after cloning the repo, that will also enable Tiny-AES library usage.
         make verify-aes_test-rtl
         
-# Layout 
+# Chip Layout :
+
+![image](https://user-images.githubusercontent.com/51058246/186234203-435d4e3c-1179-4138-9406-9e1f59effc26.png) 
+        
+# Block Layout :
+
 ![final_layout](https://user-images.githubusercontent.com/51058246/172377979-e42c2293-6e49-4b4f-b249-963d19f71cc6.png)
 
